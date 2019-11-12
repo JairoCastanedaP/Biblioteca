@@ -406,84 +406,96 @@
                 }
             },
             desactivarUsuario(id){
-               swal({
-                title: 'Esta seguro de desactivar este usuario?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar!',
-                cancelButtonText: 'Cancelar',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false,
-                reverseButtons: true
-                }).then((result) => {
-                if (result.value) {
-                    let me = this;
+                    const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                    })
+                    swalWithBootstrapButtons.fire({
+                    title: 'Estás seguro de desactivar este usuario?',
+                   // text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Si , desactivar!',
+                    cancelButtonText: 'No, cancelar!',
+                    reverseButtons: true
+                    }).then((result) => {
+                    if (result.value) {
+                        let me=this;
 
-                    axios.put('/user/desactivar',{
-                        'id': id
-                    }).then(function (response) {
-                        me.listarPersona(1,'','nombre');
-                        swal(
-                        'Desactivado!',
-                        'El registro ha sido desactivado con éxito.',
-                        'success'
+                        axios.put('/user/desactivar',{
+                            
+                            'id': id
+                        }).then(function (response) 
+                           { me.listarPersona(1,'','nombre');
+                            swalWithBootstrapButtons.fire('Desactivado!','El usuario ha sido desactivado con éxito','succes')
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    } else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire(
+                        'Cancelado',
+                        'El documento no ha sido desactivado',
+                        'error'
                         )
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                    
-                    
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === swal.DismissReason.cancel
-                ) {
-                    
-                }
-                }) 
+                    }
+                    })
             },
             activarUsuario(id){
-               swal({
-                title: 'Esta seguro de activar este usuario?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar!',
-                cancelButtonText: 'Cancelar',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false,
-                reverseButtons: true
-                }).then((result) => {
-                if (result.value) {
-                    let me = this;
+                
+                    const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                    })
+                    swalWithBootstrapButtons.fire({
+                    title: 'Estás seguro de activar este usuario ?',
+                   // text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Si , activar!',
+                    cancelButtonText: 'No, cancelar!',
+                    reverseButtons: true
+                    }).then((result) => {
+                    if (result.value) {
+                        let me=this;
 
-                    axios.put('/user/activar',{
-                        'id': id
-                    }).then(function (response) {
-                        me.listarPersona(1,'','nombre');
-                        swal(
-                        'Activado!',
-                        'El registro ha sido activado con éxito.',
-                        'success'
+                        axios.put('/user/activar',{
+                            
+                            'id': id
+                        }).then(function (response) {
+                            me.listarPersona(1,'','nombre');
+
+                            swalWithBootstrapButtons.fire(
+                            'Activado!',
+                            'El documento ha sido activada con éxito',
+                            'succes'
+                            )
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    } else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire(
+                        'Cancelado',
+                        'El usuario no ha sido activado',
+                        'error'
                         )
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                    
-                    
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === swal.DismissReason.cancel
-                ) {
-                    
-                }
-                }) 
+                    }
+                    })
             }
-        },
+            },
         mounted() {
             this.listarPersona(1,this.buscar,this.criterio);
         }

@@ -7,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Sistema Ventas Laravel Vue Js- IncanatoIT">
   <meta name="author" content="Incanatoit.com">
-  <meta name="keyword" content="Sistema ventas Laravel Vue Js, Sistema compras Laravel Vue Js">
+  <meta name="keyword" content="Sistema bibliotecario desarrollado por estudiantes de Ingeniería de Sistemas y computación de la Universidad Pedagógica y Tecnológica de Colombia seccional Sogamoso.">
 
-  <title>Sistema Ventas - IncanatoIT</title>
+  <title>Sistema Bibliotecario</title>
 
  <!-- Main styles for this application -->
- <link href="css/style.css" rel="stylesheet">
+ <link href="css/plantilla.css" rel="stylesheet">
 
 </head>
 

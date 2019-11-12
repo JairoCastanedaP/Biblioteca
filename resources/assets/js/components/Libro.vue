@@ -138,12 +138,18 @@
                                         <input type="email" v-model="descripcion" class="form-control" placeholder="Descripción del documento">
                                     </div>
                                 </div>
-                        <div class="form-group row">
+                                <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">Valor</label>
                                     <div class="col-md-9">
                                         <input type="number" v-model="valor" class="form-control" placeholder="">
                                     </div>
                                 </div> 
+                                  <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="email-input">Editorial</label>
+                                    <div class="col-md-9">
+                                        <input type="text" v-model="editorial" class="form-control" placeholder="Editorial">
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">Stock</label>
                                     <div class="col-md-9">

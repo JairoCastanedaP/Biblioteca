@@ -1,5 +1,4 @@
 <?php
- 
 namespace App\Http\Controllers\Auth;
  
 use App\Http\Controllers\Controller;
@@ -18,21 +17,17 @@ class LoginController extends Controller
         if (Auth::attempt(['usuario' => $request->usuario,'password' => $request->password,'condicion'=>1])){
             return redirect()->route('main');
         }
- 
         return back()
         ->withErrors(['usuario' => trans('auth.failed')])
         ->withInput(request(['usuario']));
  
     }
- 
     protected function validateLogin(Request $request){
         $this->validate($request,[
             'usuario' => 'required|string',
             'password' => 'required|string'
         ]);
- 
     }
- 
     public function logout(Request $request){
         Auth::logout();
         $request->session()->invalidate();

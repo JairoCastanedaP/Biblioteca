@@ -58,21 +58,39 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    <span class="d-md-down-none">admin </span>
+                    <span class="d-md-down-none">{{Auth::user()->usuario}} </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="dropdown-header text-center">
                         <strong>Cuenta</strong>
                     </div>
-                    <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Perfil</a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Cerrar sesión</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fa fa-lock"></i> Cerrar sesión</a>
+ 
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </div>
             </li>
         </ul>
     </header>
 
     <div class="app-body">
-        @include('plantilla.sidebar')
+
+    @if(Auth::check())
+
+        @if(Auth::user()->idrol == 1)
+            @include('plantilla.sidebarAdministrador')
+        @elseif(Auth::user()->idrol == 2)
+            @include('plantilla.sidebarSecretario')
+        @elseif(Auth::user()->idrol == 3)
+            @include('plantilla.sidebarBibliotecario')
+        @else
+
+        @endif    
+            
+    @endif
 
         <!-- Contenido Principal -->
         @yield('contenido')
@@ -81,7 +99,7 @@
     </div>
 
     <footer class="app-footer">
-        <span><a href="http://www.incanatoit.com/">Gerencia UPTC</a> &copy; 2017</span>
+        <span><a href="http://www.incanatoit.com/">Gerencia UPTC</a> &copy; 2019</span>
         <span class="ml-auto">Desarrollado por <a href="http://www.incanatoit.com/">Jairo Castañeda</a></span>
     </footer>
     
